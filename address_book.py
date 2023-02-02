@@ -2,13 +2,18 @@
 import re
 from class_list import Name, Phone, Record, AddressBook, User, Birthday
 
+command_list = ["hello", "add", "change",
+                "phone", "show all", "close", "exit", "good bye", "birthday", "on page", "search", "save", "load"]
+command_list_with_name = ["add", "change", "phone", "birthday"]
+command_list_exit = ["close", "exit", "good bye"]
+
+
+def undestand_commnad()
+
 
 def main_address_book():
     user_1 = User()
-    command_list = ["hello", "add", "change",
-                    "phone", "show all", "close", "exit", "good bye", "birthday", "on page", "search", "save", "load"]
-    command_list_with_name = ["add", "change", "phone", "birthday"]
-    command_list_exit = ["close", "exit", "good bye"]
+
     address_book = user_1.command_load()
     print("Address book:")
     address_book.show_all()

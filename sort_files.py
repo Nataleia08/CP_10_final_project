@@ -3,6 +3,19 @@ from os import rename, listdir
 from shutil import move, unpack_archive
 from os.path import join
 
+list_video_path = ['AVI', 'MP4', 'MOV', 'MKV']
+list_arhive_path = ['RAR', '7Z', 'TAR', 'GZ', 'ZIP']
+list_docum_path = ['DOC', 'DOCX', 'TXT',
+                   'PDF', 'XLSX', 'XLS', 'PPTX', 'PPT', 'RTF', 'VSDX']
+list_audio_path = ['MP3', 'OGG', 'WAV', 'AMR']
+list_images_path = ['JPEG', 'PNG', 'JPG', 'SVG', 'BMP']
+
+list_video_path_small = [i.lower() for i in list_video_path]
+list_arhive_path_small = [i.lower() for i in list_arhive_path]
+list_docum_path_small = [i.lower() for i in list_docum_path]
+list_audio_path_small = [i.lower() for i in list_audio_path]
+list_images_path_small = [i.lower() for i in list_images_path]
+
 
 def translate_name_file(name) -> str:
     """Функція транслітерації назв файлів та папок"""
@@ -124,19 +137,19 @@ def sorting(path: Path, list_path) -> list:
                 i_new = normalize(i_path)
                 # i_roz_with = i_new.name.split(".")
                 i_roz = i_new.suffix.removeprefix(".")
-                if (i_roz == "jpg") or (i_roz == "png") or (i_roz == "jpeg") or (i_roz == "svg") or (i_roz == "bmp"):
+                if i_roz in list_images_path_small:
                     known_list.add(i_roz)
                     move_files(i_new, 4, list_path)
-                elif (i_roz == "avi") or (i_roz == "mp4") or (i_roz == "mov") or (i_roz == "mkv"):
+                elif i_roz in list_video_path_small:
                     known_list.add(i_roz)
                     move_files(i_new, 0, list_path)
-                elif (i_roz == "doc") or (i_roz == "docx") or (i_roz == "txt") or (i_roz == "pdf") or (i_roz == "rtf") or (i_roz == "xlsx") or (i_roz == "xls") or (i_roz == "pptx") or (i_roz == "ppt") or (i_roz == "vsdx"):
+                elif i_roz in list_docum_path_small:
                     known_list.add(i_roz)
                     move_files(i_new, 3, list_path)
-                elif (i_roz == "mp3") or (i_roz == "ogg") or (i_roz == "wav") or (i_roz == "amr"):
+                elif i_roz in list_audio_path_small:
                     known_list.add(i_roz)
                     move_files(i_new, 2, list_path)
-                elif (i_roz == "zip") or (i_roz == "tar") or (i_roz == "gz") or (i_roz == "rar") or (i_roz == "ZIP") or (i_roz == "7z"):
+                elif i_roz in list_arhive_path_small:
                     known_list.add(i_roz)
                     moved_path = move_files(i_new, 1, list_path)
                     arh_temp_path = moved_path.name.removesuffix(
@@ -172,36 +185,30 @@ def creating_folder(path: Path) -> list:
 # -----------Створення папок для відео-----------
     video_path = path / 'video'
     video_path.mkdir(exist_ok=True)
-    list_video_path = ['AVI', 'MP4', 'MOV', 'MKV']
     for name_path in list_video_path:
         pod_video_path = video_path / name_path
         pod_video_path.mkdir(exist_ok=True)
     # ------Створення папок для архівів--------------
     archive_path = path / "archives"
     archive_path.mkdir(exist_ok=True)
-    list_arhive_path = ['RAR', '7Z', 'TAR', 'GZ', 'ZIP']
     for name_path in list_arhive_path:
         pod_video_path = archive_path / name_path
         pod_video_path.mkdir(exist_ok=True)
     # ------Створення папок для аудио-файлів--------------
     audio_path = path / "audio"
     audio_path.mkdir(exist_ok=True)
-    list_audio_path = ['MP3', 'OGG', 'WAV', 'AMR']
     for name_path in list_audio_path:
         pod_video_path = audio_path / name_path
         pod_video_path.mkdir(exist_ok=True)
     # ------Створення папок для документів--------------
     document_path = path / "documents"
     document_path.mkdir(exist_ok=True)
-    list_docum_path = ['DOC', 'DOCX', 'TXT',
-                       'PDF', 'XLSX', 'XLS', 'PPTX', 'PPT', 'RTF', 'VSDX']
     for name_path in list_docum_path:
         pod_video_path = document_path / name_path
         pod_video_path.mkdir(exist_ok=True)
     # ------Створення папок для зображень--------------
     image_path = path / "images"
     image_path.mkdir(exist_ok=True)
-    list_images_path = ['JPEG', 'PNG', 'JPG', 'SVG', 'BMP']
     for name_path in list_images_path:
         pod_video_path = image_path / name_path
         pod_video_path.mkdir(exist_ok=True)
