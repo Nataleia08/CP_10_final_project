@@ -223,12 +223,16 @@ def creating_folder(path: Path) -> list:
 
 
 def main_sort_files():
-    p = Path(input("Введіть шлях до папки:"))
-    if p.is_dir():
-        list_path = function.creating_folder(p)
-        result = function.sorting(p, list_path)
-        print("Сортування виконано успішно!")
-        print("Список відомих розширень файлів у папці:", result[1])
-        print("Список невідомих розширень у папці:", result[0])
-    else:
-        print("Це не шлях до папки!")
+    while True:
+        p = Path(input("Введіть шлях до папки:"))
+        if p.is_dir():
+            list_path = function.creating_folder(p)
+            result = function.sorting(p, list_path)
+            print("Сортування виконано успішно!")
+            print("Список відомих розширень файлів у папці:", result[1])
+            print("Список невідомих розширень у папці:", result[0])
+        else:
+            print("Це не шлях до папки!")
+        user_input = input("You wont sort again? Yes or no?")
+        if user_input.lower() in ["close", "exit", ".", "no", "not", "n"]:
+            break
